@@ -1,0 +1,19 @@
+
+  .app {
+    text-align: center;
+    margin: 5% 20%;
+    background-color: #DC7633 ;
+    color: black;
+    height: auto;
+    width: auto;
+    padding-top: 2%;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  .profile-logo {
+    width: 72px;
+    height: 72px;
+  }
+  
+  
