@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import  Button  from "react-bootstrap/Button";
+import { Form, Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "../../App.css";
 
 const Login = () => {
@@ -28,7 +27,7 @@ const Login = () => {
         <h1>Please Sign In</h1>
         <Form.Group  md="6" controlId="validationCustom03">
         <Form.Label>Email address: </Form.Label>
-          <Form.Control type="email" placeholder="Enter email" required />
+          <Form.Control type="email" placeholder="Enter email" required/>
           <Form.Control.Feedback type="invalid">Please provide a valid Email ID.
           </Form.Control.Feedback>
         </Form.Group>
@@ -41,6 +40,11 @@ const Login = () => {
         <br />
         <Form.Group className="mb-6" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Remember me"/>
+          <Form.Text className="mb-6" id="backtoLogin">
+          <nav>
+            <Link to="/ForgotPassword">ForgotPassword?</Link>
+          </nav>
+        </Form.Text>
         </Form.Group>
         <br />
         <div className="d-grid">
