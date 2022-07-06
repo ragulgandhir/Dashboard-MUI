@@ -18,7 +18,7 @@ function CardDetail() {
       </Col>
       <br />
       <Col>
-      <Card bg="warning" variant="warning" style={{ width: '18rem', marginLeft:'3.0rem' }}>
+      <Card bg="warning" variant="warning" style={{ width: '18rem', marginLeft:'3rem' }}>
         <Card.Header>Orders</Card.Header>
         <Card.Body>
           <Card.Title>Today's Orders</Card.Title>
@@ -30,7 +30,7 @@ function CardDetail() {
       </Col>
       <br />
       <Col>
-      <Card bg="success" variant="success" style={{ width: '18rem' }}>
+      <Card bg="light" variant="light" style={{ width: '18rem', marginLeft: '2rem' }}>
         <Card.Header>Users Count</Card.Header>
         <Card.Body>
           <Card.Title>Active Users</Card.Title>

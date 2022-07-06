@@ -1,11 +1,16 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import Button from 'react-bootstrap/Button';
+import NavbarItems from "../Dashboard/Navbar";
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 function ProductTable() {
   return (
     <div>
-      <Table striped bordered hover variant="dark">
+       <NavbarItems />
+      <Table striped bordered hover variant="dark" style={{ width: '69.8rem', marginLeft:'5.5rem'}}>
         <thead>
           <tr>
             <th>#Product_ID</th>
@@ -30,9 +35,9 @@ function ProductTable() {
             <td>07/20/2022</td>
             <td>Instock</td>
             <td>
-            <Button variant="info">View</Button>{' '}
-            <Button variant="secondary">Edit</Button>{' '}
-            <Button variant="danger">Delete</Button>{' '}
+            <Button variant="info"><VisibilityOutlinedIcon/></Button>{' '}
+            <Button variant="secondary"><ModeEditOutlineOutlinedIcon/></Button>{' '}
+            <Button variant="danger"><DeleteOutlineOutlinedIcon/></Button>{' '}
             </td>
           </tr>
           <tr>
@@ -45,9 +50,9 @@ function ProductTable() {
             <td>07/20/2022</td>
             <td>Outofstock</td>
             <td>
-            <Button variant="info">View</Button>{' '}
-            <Button variant="secondary">Edit</Button>{' '}
-            <Button variant="danger">Delete</Button>{' '}
+            <Button variant="info"><VisibilityOutlinedIcon/></Button>{' '}
+            <Button variant="secondary"><ModeEditOutlineOutlinedIcon/></Button>{' '}
+            <Button variant="danger"><DeleteOutlineOutlinedIcon/></Button>{' '}
             </td>
           </tr>
           <tr>
@@ -60,9 +65,9 @@ function ProductTable() {
             <td>07/20/2022</td>
             <td>Billed</td>
             <td>
-            <Button variant="info">View</Button>{' '}
-            <Button variant="secondary">Edit</Button>{' '}
-            <Button variant="danger">Delete</Button>{' '}
+            <Button variant="info"><VisibilityOutlinedIcon/></Button>{' '}
+            <Button variant="secondary"><ModeEditOutlineOutlinedIcon/></Button>{' '}
+            <Button variant="danger"><DeleteOutlineOutlinedIcon/></Button>{' '}
             </td>
           </tr>
         </tbody>

@@ -81,7 +81,11 @@ function NavbarItems() {
                         <ListItemIcon>
                           <DashboardIcon color="primary" />
                         </ListItemIcon>
-                        <ListItemText primary="Dashboard" />
+                        <ListItemText>
+                          <nav>
+                            <Link to="/Dashboard">Dashboard</Link>
+                          </nav>
+                        </ListItemText>
                       </ListItem>
                       <ListItem button>
                         <ListItemIcon>
@@ -127,9 +131,9 @@ function NavbarItems() {
                           <ExitToAppIcon color="primary" />
                         </ListItemIcon>
                         <ListItemText>
-                        <nav>
-                          <Link to="/">Logout</Link>
-                        </nav>
+                          <nav>
+                            <Link to="/">Logout</Link>
+                          </nav>
                         </ListItemText>
                       </ListItem>
                     </List>
