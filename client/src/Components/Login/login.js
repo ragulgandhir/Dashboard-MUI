@@ -1,38 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
 import "../../App.css";
 
 const Login = () => {
-    const [validated, setValidated] = useState(false);
-    const [data,setData] = useState({ username:"", password:"" })
-    const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState(false);
+  const [error, setError] = useState("");
 
-    const {username,password} = data;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // set configurations
+    const configuration = {
+      method: "post",
+      url: "http://localhost:3000/api/users/login",
+      data: {
+        email,
+        password,
+      },
+    };
 
-    const changeHandler = (e) => {
-      setData({...data,[e.target.name]:[e.target.value]});
+    // make the API call
+    axios(configuration)
+      .then((result) => {
+        setLogin(true);
+        console.log(result);
+      })
+      .catch((error) => {
+        error = new Error();
+      });
+
+    if (!email || !password) {
+      setError("Please give some input all input field");
+    } else {
+      setError("");
     }
-
-    const handleSubmit = (e) => {
-        // const form = e.currentTarget;
-        // if (form.checkValidity() === false) {
-          e.preventDefault();
-          if(!password){
-            setError("Please give some input all input field");
-        }else{
-             console.log(data);
-             setError("");
-          }
-          // e.stopPropagation();
-        }
-    
-        // setValidated(true);
-      // };
+  };
 
   return (
     <Container>
-      <Form noValidate /*validated={validated}*/ onSubmit={handleSubmit} style={{width:"80%", marginLeft:"10%", marginTop:"10%"}}>
+      <Form
+        noValidate
+        onSubmit={(e) => handleSubmit(e)}
+        style={{ width: "80%", marginLeft: "10%", marginTop: "10%" }}
+      >
         <img
           className="mb-4 profile-logo"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png"
@@ -40,32 +53,48 @@ const Login = () => {
         />
         <h1>Please Sign In</h1>
         {error && <h6 style={{ color: "red" }}>{error}</h6>}
-        <Form.Group  md="6" controlId="validationCustom03">
-        <Form.Label>Email address: </Form.Label>
-          <Form.Control type="email" name="username" value={username} onChange={changeHandler} placeholder="Enter email" required/>
-          <Form.Control.Feedback type="invalid">Please provide a valid Email ID.
-          </Form.Control.Feedback>
+        {login && <Navigate to="/Dashboard" replace={true} />}
+        <Form.Group md="6" controlId="validationCustom03">
+          <Form.Label>Email address: </Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter email"
+            required
+          />
         </Form.Group>
         <Form.Group className="mb-6" controlId="formBasicPassword">
-        <Form.Label>Password: </Form.Label>
-          <Form.Control type="password" name="password" value={password} onChange={changeHandler} placeholder="Password" required />
-          <Form.Control.Feedback type="invalid">Please provide a valid password.
-          </Form.Control.Feedback>
+          <Form.Label>Password: </Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
         </Form.Group>
         <br />
         <Form.Group className="mb-6" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Remember me"/>&ensp;
+          <Form.Check type="checkbox" label="Remember me" />
+          &ensp;
           <Form.Text className="mb-6" id="backtoLogin">
-          <nav>
-            <Link to="/ForgotPassword">ForgotPassword?</Link>
-            &nbsp; &nbsp;
-            Not yet{" "}<Link to="/Registration">Sign Up?</Link>
-          </nav>
-        </Form.Text>
+            <nav>
+              <Link to="/ForgotPassword">ForgotPassword?</Link>
+              &nbsp; &nbsp; Not yet <Link to="/Registration">Sign Up?</Link>
+            </nav>
+          </Form.Text>
         </Form.Group>
         <br />
         <div className="d-grid">
-          <Button variant="primary" type="submit" name="submit">
+          <Button
+            variant="primary"
+            type="submit"
+            name="submit"
+            onClick={(e) => handleSubmit(e)}
+          >
             Sign in
           </Button>
           <br />
@@ -73,9 +102,16 @@ const Login = () => {
             Cancel
           </Button>
         </div>
-        <p className="mt-5 text-muted">&copy; Shenll Technology Pvt Ltd(2021-2022)</p>
+        <p className="mt-5 text-muted">
+          &copy; Shenll Technology Pvt Ltd(2021-2022)
+        </p>
+        {login ? (
+          <p className="text-success">You Are Logged in Successfully</p>
+        ) : (
+          <p className="text-danger">You Are Not Logged in</p>
+        )}
       </Form>
-      </Container>
+    </Container>
   );
 };
 export default Login;
