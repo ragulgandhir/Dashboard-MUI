@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Form, Container, Button } from "react-bootstrap";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import AuthService from "../services/auth.service";
 import "../../App.css";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
   const [error, setError] = useState("");
+
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,9 +28,9 @@ const Login = () => {
 
     // make the API call
     axios(configuration)
-      .then((result) => {
+      .then((response) => {
         setLogin(true);
-        console.log(result);
+        console.log(response);
       })
       .catch((error) => {
         error = new Error();
@@ -53,7 +57,7 @@ const Login = () => {
         />
         <h1>Please Sign In</h1>
         {error && <h6 style={{ color: "red" }}>{error}</h6>}
-        {login && <Navigate to="/Dashboard" replace={true} />}
+        {/* {login && <Navigate to="/Dashboard" replace={true} />} */}
         <Form.Group md="6" controlId="validationCustom03">
           <Form.Label>Email address: </Form.Label>
           <Form.Control

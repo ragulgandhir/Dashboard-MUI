@@ -10,19 +10,15 @@ import OrderTable from "./Components/Tables/OrderTable";
 import ForgotPassword from "./Components/Login/forgotPassword";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Registration from "./Components/Login/registrationForm";
-import ProtectedRoute from "./Components/authjwt/ProtectedRoute";
-import { history } from "./Components/authjwt/history";
-import { setAuthToken } from "./Components/authjwt/setAuthToken";
+import AuthService from "./Components/services/auth.service";
+import authHeader from "./Components/services/auth.header";
+import { setAuthToken } from "./Components/services/setAuthToken";
 import "./App.css";
 
 function App() {
-  const token = localStorage.getItem("token");
-  if (token) {
-      setAuthToken(token);
-  }
   return (
     <div>
-      <Routes history={history}>
+      <Routes>
         <Route
           path="/"
           element={
