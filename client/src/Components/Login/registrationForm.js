@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Container, Button } from "react-bootstrap";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import swal from 'sweetalert';
 import "../../App.css";
 
 const Registration = () => {
@@ -13,31 +14,79 @@ const Registration = () => {
   const [register, setRegister] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // set configurations
-    const configuration = {
-      method: "post",
-      url: "http://localhost:3000/api/users/register",
-      data: {
-        name,
-        email,
-        password,
-        mobileNumber,
-        address,
-      },
-    };
+    // const configuration = {
+    //   method: "post",
+    //   url: "http://localhost:3000/api/users/register",
+    //   data: {
+    //     name,
+    //     email,
+    //     password,
+    //     mobileNumber,
+    //     address,
+    //   },
+    // };
 
     // make the API call
-    axios(configuration)
-      .then((result) => {
-        setRegister(true);
-      })
-      .catch((error) => {
-        error = new Error();
-      });
+    // axios(configuration)
+    //   .then((result) => {
+    //     setRegister(true);
+    //   })
+    //   .catch((error) => {
+    //     error = new Error();
+    //   });
 
-    if (!name || !email || !password || !mobileNumber || !address) {
+    // if (!name || !email || !password || !mobileNumber || !address) {
+    //   setError("Please give some input all input field");
+    // } else {
+    //   setError("");
+    // }
+
+    try {
+      const config = {
+          headers: {
+              "Content-type":"application/json"
+          }
+      }
+      const { data } = await axios.post("http://localhost:3000/api/users/register", 
+      {
+          name,
+          email,
+          password,
+          mobileNumber,
+          address
+      },
+      config
+  );
+  swal({
+      text: "Register Success",
+      icon: "success",
+      timer: 1500
+    });
+
+      console.log("data",data);
+      localStorage.setItem('userRegisterInfo',JSON.stringify(data));
+      // window.location = 'http://localhost:3001/login_page';
+      setRegister(true);
+    
+      setTimeout(function(){
+          window.location.href = 'http://localhost:3001/login';
+       }, 2000);
+
+  }catch (error){
+      swal({
+          text: error.response.data.message,
+          icon: "error",
+          timer: 1500
+        });
+
+      console.log(error);
+      error = new Error();
+  }
+
+  if (!name || !email || !password || !mobileNumber || !address) {
       setError("Please give some input all input field");
     } else {
       setError("");
@@ -57,8 +106,8 @@ const Registration = () => {
           alt="profile"
         />
         <h1>Please Sign Up</h1>
-        {error && <h6 style={{ color: "red" }}>{error}</h6>}
-        {register && <Navigate to="/" replace={true} />}
+        {/* {error && <h6 style={{ color: "red" }}>{error}</h6>} */}
+        {/* {register && <Navigate to="/login" replace={true} />} */}
         <Form.Group md="6" controlId="validationCustom03">
           <Form.Label>User Name: </Form.Label>
           <Form.Control
@@ -88,7 +137,7 @@ const Registration = () => {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            placeholder="********"
             required
           />
         </Form.Group>
@@ -118,7 +167,7 @@ const Registration = () => {
         <Form.Group className="mb-6">
           <Form.Text className="mb-6" id="backtoLogin">
             <nav>
-              Back to <Link to="/">Login?</Link>
+              Back to <Link to="/login">Login?</Link>
             </nav>
           </Form.Text>
         </Form.Group>

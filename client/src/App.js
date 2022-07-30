@@ -10,9 +10,6 @@ import OrderTable from "./Components/Tables/OrderTable";
 import ForgotPassword from "./Components/Login/forgotPassword";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Registration from "./Components/Login/registrationForm";
-import AuthService from "./Components/services/auth.service";
-import authHeader from "./Components/services/auth.header";
-import { setAuthToken } from "./Components/services/setAuthToken";
 import "./App.css";
 
 function App() {
@@ -20,8 +17,8 @@ function App() {
     <div>
       <Routes>
         <Route
-          path="/"
-          element={
+          path="/login"
+           element={
             <Row className="landing">
               <Col>
                 <Login />
@@ -34,7 +31,7 @@ function App() {
         />
         <Route
           path="/ForgotPassword"
-          element={
+          exact element={
             <Row className="landing">
               <Col>
                 <ForgotPassword />
@@ -45,9 +42,9 @@ function App() {
             </Row>
           }
         />
-        <Route exact
+        <Route
           path="/Registration"
-          element={
+          exact element={
             <Row className="landing">
               <Col>
                 <Registration />
@@ -58,10 +55,10 @@ function App() {
             </Row>
           }
         />
-        <Route exact path="/Product" element={<ProductTable />} />
-        <Route exact path="/Order" element={<OrderTable />} />
-        <Route exact path="/User" element={<UserTable />} />
-        <Route exact path="/Dashboard" element={<Dashboard />} />
+        <Route  path="/Dashboard" exact element={<Dashboard />} />
+        <Route  path="/Product" exact element={<ProductTable />} />
+        <Route  path="/Order" exact element={<OrderTable />} />
+        <Route  path="/User" exact element={<UserTable />} />
       </Routes>
     </div>
   );

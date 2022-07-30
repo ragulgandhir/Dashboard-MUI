@@ -1,4 +1,3 @@
-import { Password } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Form, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -56,7 +55,7 @@ const ForgotPassword = () => {
         <br />
         <Form.Text className="mb-6" id="backtoLogin">
           <nav>
-          Back to{" "}<Link to="/">Login?</Link>
+          Back to{" "}<Link to="/login">Login?</Link>
           </nav>
         </Form.Text>
         <br />
