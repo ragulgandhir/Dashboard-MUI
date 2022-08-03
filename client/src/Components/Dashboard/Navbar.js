@@ -29,6 +29,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Link } from "react-router-dom";
 
+import jwt_decode from "jwt-decode";
+import swal from 'sweetalert';
+
 const settings = ["Profile", "Account", "Logout"];
 
 const useStyles = styled((theme) => ({
@@ -40,6 +43,44 @@ const useStyles = styled((theme) => ({
 }));
 
 function NavbarItems() {
+   //<-----AuthToken Check----->
+  const authToken = window.sessionStorage.getItem("AuthToken");
+
+  function AtVerify () {
+    if (!authToken) {
+      return console.log('No Login Users')
+    }
+
+
+    const decoded = jwt_decode(authToken);
+    const u__name = decoded.name;
+    console.log(u__name); 
+    return <p>Welcome <span style={{fontWeight:"600",color:"orangered",textTransform:"capitalize"}}>{u__name}</span></p>
+  }
+
+  function logout () {
+    localStorage.removeItem('userInfo');
+    window.sessionStorage.removeItem("AuthToken");
+    swal({
+      text: "Logout Success",
+      icon: "success",
+      timer: 1500
+    });
+    setTimeout(function(){
+      window.location.href = 'http://localhost:3001/';
+   }, 2000);
+
+  
+}
+
+function ReactLogout () {
+  if (!authToken) {
+    return console.log('No Logout')
+  }else {
+    return<button type="submit" onClick={logout}>Logout</button>
+  }
+}
+
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -131,9 +172,10 @@ function NavbarItems() {
                           <ExitToAppIcon color="primary" />
                         </ListItemIcon>
                         <ListItemText>
-                          <nav>
+                          {/* <nav>
                             <Link to="/">Logout</Link>
-                          </nav>
+                          </nav> */}
+                          <ReactLogout />
                         </ListItemText>
                       </ListItem>
                     </List>
@@ -159,6 +201,7 @@ function NavbarItems() {
                     />
                   </IconButton>
                 </Tooltip>
+                <AtVerify />
                 <Menu
                   sx={{ mt: "45px" }}
                   id="menu-appbar"

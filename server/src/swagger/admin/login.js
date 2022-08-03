@@ -24,7 +24,7 @@ module.exports = {
           value: 'application/json'
         }
       ],
-      responses: {
+      responses: {       
         200: {
           description: 'Success response for login.',
           schema: {
