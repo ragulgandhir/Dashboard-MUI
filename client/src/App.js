@@ -3,13 +3,13 @@ import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import { Row, Col } from "react-bootstrap";
 import RightSide from "./Components/Login/RightSide";
+import Registration from "./Components/Login/registrationForm";
 import Login from "./Components/Login/login";
-import UserTable from "./Components/Tables/UserTable";
-import ProductTable from "./Components/Tables/ProductTable";
-import OrderTable from "./Components/Tables/OrderTable";
 import ForgotPassword from "./Components/Login/forgotPassword";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import Registration from "./Components/Login/registrationForm";
+import UserTable from "./Components/Users/userList";
+import ProductTable from "./Components/Tables/ProductTable";
+import OrderTable from "./Components/Tables/OrderTable";
 import "./App.css";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
     <div>
       <Routes>
         <Route
-          path="/login"
+          path="/"
            element={
             <Row className="landing">
               <Col>
@@ -56,9 +56,9 @@ function App() {
           }
         />
         <Route  path="/Dashboard" exact element={<Dashboard />} />
+        <Route  path="/User" exact element={<UserTable />} />
         <Route  path="/Product" exact element={<ProductTable />} />
         <Route  path="/Order" exact element={<OrderTable />} />
-        <Route  path="/User" exact element={<UserTable />} />
       </Routes>
     </div>
   );

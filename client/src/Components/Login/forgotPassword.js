@@ -55,7 +55,7 @@ const ForgotPassword = () => {
         <br />
         <Form.Text className="mb-6" id="backtoLogin">
           <nav>
-          Back to{" "}<Link to="/login">Login?</Link>
+          Back to{" "}<Link to="/">Login?</Link>
           </nav>
         </Form.Text>
         <br />

@@ -3,6 +3,7 @@ import NavbarItems from "./Navbar";
 import CardDetail from "./Card";
 import { Navigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
+import "../../App.css";
 
 function Dashboard() {
   const [isLogout, setLogout] = useState('Logout')
@@ -12,7 +13,7 @@ function Dashboard() {
     
     if (authToken === null || authToken === '') {
       console.log('authToken', authToken); 
-      return <Navigate to="/login" />; 
+      return <Navigate to="/" />; 
     } else {
       decoded = jwt_decode(authToken);
     }
@@ -20,11 +21,11 @@ function Dashboard() {
  
     function logout () {
         window.sessionStorage.removeItem("AuthToken");
-        window.location = 'http://localhost:3001/login';
+        window.location = 'http://localhost:3001/';
         setLogout(false);
     }
   return (
-    <div>
+    <div className="App">
       <NavbarItems />
       <CardDetail />
       <div>

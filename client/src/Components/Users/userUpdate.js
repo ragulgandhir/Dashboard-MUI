@@ -8,71 +8,40 @@ import "../../App.css";
 const Registration = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [register, setRegister] = useState(false);
+  const [update, setUpdate] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // set configurations
-    // const configuration = {
-    //   method: "post",
-    //   url: "http://localhost:3000/api/users/register",
-    //   data: {
-    //     name,
-    //     email,
-    //     password,
-    //     mobileNumber,
-    //     address,
-    //   },
-    // };
-
-    // make the API call
-    // axios(configuration)
-    //   .then((result) => {
-    //     setRegister(true);
-    //   })
-    //   .catch((error) => {
-    //     error = new Error();
-    //   });
-
-    // if (!name || !email || !password || !mobileNumber || !address) {
-    //   setError("Please give some input all input field");
-    // } else {
-    //   setError("");
-    // }
-
     try {
       const config = {
           headers: {
               "Content-type":"application/json"
           }
       }
-      const { data } = await axios.post("http://localhost:3000/api/users/register", 
+      const { data } = await axios.put("http://localhost:3000/api/users/update/{id}", 
       {
           name,
           email,
-          password,
           mobileNumber,
           address
       },
       config
   );
   swal({
-      text: "Register Success",
+      text: "Updated Success",
       icon: "success",
       timer: 1500
     });
 
       console.log("data",data);
-      localStorage.setItem('userRegisterInfo',JSON.stringify(data));
-      // window.location = 'http://localhost:3001/login_page';
-      setRegister(true);
+      localStorage.setItem('userUpdateInfo',JSON.stringify(data));
+      setUpdate(true);
     
       setTimeout(function(){
-          window.location.href = 'http://localhost:3001/';
+          window.location.href = 'http://localhost:3001/User';
        }, 2000);
 
   }catch (error){
@@ -86,7 +55,7 @@ const Registration = () => {
       error = new Error();
   }
 
-  if (!name || !email || !password || !mobileNumber || !address) {
+  if (!name || !email || !mobileNumber || !address) {
       setError("Please give some input all input field");
     } else {
       setError("");
@@ -105,9 +74,7 @@ const Registration = () => {
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png"
           alt="profile"
         />
-        <h1>Please Sign Up</h1>
-        {error && <h6 style={{ color: "red" }}>{error}</h6>}
-        {/* {register && <Navigate to="/" replace={true} />} */}
+        <h1>Update User Details</h1>
         <Form.Group md="6" controlId="validationCustom03">
           <Form.Label>User Name: </Form.Label>
           <Form.Control
@@ -127,17 +94,6 @@ const Registration = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter Email ID"
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-6" controlId="formBasicPassword">
-          <Form.Label>Password: </Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="********"
             required
           />
         </Form.Group>
@@ -164,14 +120,6 @@ const Registration = () => {
           />
         </Form.Group>
         <br />
-        <Form.Group className="mb-6">
-          <Form.Text className="mb-6" id="backtoLogin">
-            <nav>
-              Back to <Link to="/">Login?</Link>
-            </nav>
-          </Form.Text>
-        </Form.Group>
-        <br />
         <div className="d-grid">
           <Button
             variant="primary"
@@ -189,11 +137,6 @@ const Registration = () => {
         <p className="mt-5 text-muted">
           &copy; Shenll Technology Pvt Ltd(2021-2022)
         </p>
-        {register ? (
-          <p className="text-success">You Are Registered Successfully</p>
-        ) : (
-          <p className="text-danger">You Are Not Registered</p>
-        )}
       </Form>
     </Container>
   );

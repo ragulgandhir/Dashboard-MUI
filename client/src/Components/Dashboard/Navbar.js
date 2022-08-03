@@ -67,7 +67,7 @@ function NavbarItems() {
       timer: 1500
     });
     setTimeout(function(){
-      window.location.href = 'http://localhost:3001/login';
+      window.location.href = 'http://localhost:3001/';
    }, 2000);
 
   

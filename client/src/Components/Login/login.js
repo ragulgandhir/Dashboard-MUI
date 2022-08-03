@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Form, Container, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import AuthService from "../services/auth.service";
 import swal from 'sweetalert';
 import "../../App.css";
 
